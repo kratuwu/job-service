@@ -23,11 +23,11 @@ public class SalarySurveyController {
 
     @GetMapping
     public ResponseEntity<List<Object>> getJobDataList(
-            @RequestParam(required = false) List<String> fields,
+            @RequestParam(required = false, defaultValue = "") List<String> fields,
             @RequestParam(defaultValue = "id:ASC", required = false) List<String> sorts,
             @RequestParam(required = false) String gender,
-            @RequestParam(value = "job_title", required = false) String jobTitle,
-            @RequestParam(required = false) BigDecimal minSalary,
+            @RequestParam(required = false) String jobTitle,
+            @RequestParam(name = "salary[gte]", required = false) BigDecimal minSalary,
             @RequestParam(required = false) BigDecimal maxSalary) {
 
         return new ResponseEntity<>(

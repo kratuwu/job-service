@@ -41,13 +41,11 @@ public class SeedSalarySurveyData implements CommandLineRunner {
                             .gender(row[10])
                             .additionalComments(row[10])
                             .build());
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (Exception ignored) {
                 }
                 salarySurveyRepository.saveAll(salarySurveys);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 }
