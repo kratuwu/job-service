@@ -18,11 +18,13 @@ public class SalarySurveySpecification {
                 .and(SalarySurveySpecification.hasGender(gender));
         if (nonNull(salaryGte)) {
             spec = spec.and(SalarySurveySpecification.hasSalaryGreaterThanEqual(salaryGte));
-        } else if(nonNull(salaryLte)) {
+        } else if (nonNull(salaryLte)) {
             spec = spec.and(SalarySurveySpecification.hasSalaryLessThanEqual(salaryLte));
         }
         return spec;
-    };
+    }
+
+    ;
 
     public static Specification<SalarySurvey> hasJobTitle(String jobTitle) {
         return (root, query, criteriaBuilder) ->

@@ -12,6 +12,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Collections.replaceAll;
+
 @Configuration
 @RequiredArgsConstructor
 public class SeedSalarySurveyData implements CommandLineRunner {
@@ -34,7 +36,7 @@ public class SeedSalarySurveyData implements CommandLineRunner {
                             .jobTitle(row[3])
                             .yearsAtEmployer(row[4])
                             .yearsOfExperience(row[5])
-                            .salary(new BigDecimal(row[6]))
+                            .salary(new BigDecimal(row[6].replaceAll("[€$£¥,|USD|EUR|NZD|GBP|CAD|AUD]", "").trim()))
                             .signingBonus(row[7])
                             .annualBonus(row[8])
                             .annualStockValueBonus(row[9])
@@ -43,8 +45,8 @@ public class SeedSalarySurveyData implements CommandLineRunner {
                             .build());
                 } catch (Exception ignored) {
                 }
-                salarySurveyRepository.saveAll(salarySurveys);
             }
+            salarySurveyRepository.saveAll(salarySurveys);
         } catch (Exception ignored) {
         }
     }
