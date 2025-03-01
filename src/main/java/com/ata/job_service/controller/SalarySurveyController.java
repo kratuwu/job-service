@@ -26,16 +26,16 @@ public class SalarySurveyController {
             @RequestParam(required = false, defaultValue = "") List<String> fields,
             @RequestParam(defaultValue = "id:ASC", required = false) List<String> sorts,
             @RequestParam(required = false) String gender,
-            @RequestParam(required = false) String jobTitle,
-            @RequestParam(name = "salary[gte]", required = false) BigDecimal minSalary,
-            @RequestParam(required = false) BigDecimal maxSalary) {
+            @RequestParam(name = "job_title", required = false) String jobTitle,
+            @RequestParam(name = "salary_gte", required = false) BigDecimal salaryGte,
+            @RequestParam(name = "salary_lte", required = false) BigDecimal salaryLte) {
 
         return new ResponseEntity<>(
                 salarySurveyService.getSalarySurvey(
                         gender,
                         jobTitle,
-                        minSalary,
-                        maxSalary,
+                        salaryGte,
+                        salaryLte,
                         SortBuilder.getSort(sorts),
                         FieldFilterUtil.buildCamelQueryFields(fields)
                 ),

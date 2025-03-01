@@ -14,8 +14,9 @@ import static java.util.Objects.nonNull;
 public class SalarySurveySpecification {
 
     public static Specification<SalarySurvey> getSalarySurveyCriteria(String gender, String jobTitle, BigDecimal salaryGte, BigDecimal salaryLte) {
-        Specification<SalarySurvey> spec = Specification.where(SalarySurveySpecification.hasJobTitle(jobTitle));
-        spec = spec.and(SalarySurveySpecification.hasGender(gender));
+        Specification<SalarySurvey> spec = Specification
+                .where(SalarySurveySpecification.hasJobTitle(jobTitle))
+                .and(SalarySurveySpecification.hasGender(gender));
         if (nonNull(salaryGte)) {
             spec = spec.and(SalarySurveySpecification.hasSalaryGreaterThanEqual(salaryGte));
         } else if(nonNull(salaryLte)) {
