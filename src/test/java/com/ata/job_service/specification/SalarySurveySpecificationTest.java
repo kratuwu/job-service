@@ -29,6 +29,7 @@ class SalarySurveySpecificationTest {
 
     @Mock
     private Predicate predicate;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -121,11 +122,10 @@ class SalarySurveySpecificationTest {
     @Test
     void should_return_correct_specification_when_call_with_salary_gte() {
         String jobTitle = "Software Engineer";
-        when(criteriaBuilder.equal(root.get("jobTitle"), jobTitle)).thenReturn(predicate);
+        String gender = "Male";
         BigDecimal salaryGte = BigDecimal.valueOf(10000);
         when(criteriaBuilder.greaterThanOrEqualTo(root.get("salary"), salaryGte)).thenReturn(predicate);
-        String gender = "Male";
-        when(criteriaBuilder.equal(root.get("gender"), gender)).thenReturn(predicate);
+        doReturn(predicate).when(criteriaBuilder).equal(any(), any());
 
         // When
 
@@ -135,6 +135,7 @@ class SalarySurveySpecificationTest {
         assertNotNull(actualPredicate);
         assertEquals(predicate, actualPredicate);
         verify(criteriaBuilder).greaterThanOrEqualTo(root.get("salary"), salaryGte);
+        verify(criteriaBuilder, never()).lessThanOrEqualTo(any(), any(BigDecimal.class));
         verify(criteriaBuilder).equal(root.get("gender"), gender);
         verify(criteriaBuilder).equal(root.get("jobTitle"), jobTitle);
     }
@@ -142,20 +143,19 @@ class SalarySurveySpecificationTest {
     @Test
     void should_return_correct_specification_when_call_with_salary_lte() {
         String jobTitle = "Software Engineer";
-        when(criteriaBuilder.equal(root.get("jobTitle"), jobTitle)).thenReturn(predicate);
+        String gender = "Male";
         BigDecimal salaryLte = BigDecimal.valueOf(10000);
         when(criteriaBuilder.lessThanOrEqualTo(root.get("salary"), salaryLte)).thenReturn(predicate);
-        String gender = "Male";
-        when(criteriaBuilder.equal(root.get("gender"), gender)).thenReturn(predicate);
+        doReturn(predicate).when(criteriaBuilder).equal(any(), any());
 
         // When
-
         Specification<SalarySurvey> spec = SalarySurveySpecification.getSalarySurveyCriteria(gender, jobTitle, null, salaryLte);
         assertNotNull(spec);
         Predicate actualPredicate = spec.toPredicate(root, query, criteriaBuilder);
         assertNotNull(actualPredicate);
         assertEquals(predicate, actualPredicate);
         verify(criteriaBuilder).lessThanOrEqualTo(root.get("salary"), salaryLte);
+        verify(criteriaBuilder, never()).greaterThanOrEqualTo(any(), any(BigDecimal.class));
         verify(criteriaBuilder).equal(root.get("gender"), gender);
         verify(criteriaBuilder).equal(root.get("jobTitle"), jobTitle);
     }
@@ -176,5 +176,8 @@ class SalarySurveySpecificationTest {
         assertEquals(predicate, actualPredicate);
         verify(criteriaBuilder).equal(root.get("gender"), gender);
         verify(criteriaBuilder).equal(root.get("jobTitle"), jobTitle);
+        verify(criteriaBuilder, never()).lessThanOrEqualTo(any(), any(BigDecimal.class));
+        verify(criteriaBuilder, never()).greaterThanOrEqualTo(any(), any(BigDecimal.class));
+
     }
 }

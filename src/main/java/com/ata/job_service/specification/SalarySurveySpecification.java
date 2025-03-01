@@ -2,7 +2,6 @@ package com.ata.job_service.specification;
 
 import com.ata.job_service.entity.SalarySurvey;
 import lombok.experimental.UtilityClass;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.math.BigDecimal;
