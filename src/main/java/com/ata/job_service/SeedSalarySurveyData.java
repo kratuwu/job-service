@@ -48,6 +48,7 @@ public class SeedSalarySurveyData implements CommandLineRunner {
             }
             salarySurveyRepository.saveAll(salarySurveys);
         } catch (Exception ignored) {
+            ignored.printStackTrace();
         }
     }
 }

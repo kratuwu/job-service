@@ -32,6 +32,7 @@ public class SalarySurvey {
 
     private String yearsOfExperience;
 
+    @Column(precision = 21, scale = 6)
     private BigDecimal salary;
 
     private String signingBonus;

@@ -6,7 +6,7 @@ CREATE TABLE salary_survey (
     job_title VARCHAR(255),
     years_at_employer VARCHAR(255),
     years_of_experience VARCHAR(255),
-    salary DECIMAL(15,2),
+    salary NUMERIC(21,6),
     signing_bonus VARCHAR(255),
     annual_bonus VARCHAR(255),
     annual_stock_value_bonus VARCHAR(255),

@@ -24,8 +24,6 @@ public class SalarySurveySpecification {
         return spec;
     }
 
-    ;
-
     public static Specification<SalarySurvey> hasJobTitle(String jobTitle) {
         return (root, query, criteriaBuilder) ->
                 isNull(jobTitle)
