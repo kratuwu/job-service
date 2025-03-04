@@ -1,4 +1,11 @@
 # job-service
+## Overview
+This is a Spring Boot application with JPA, Web, and other dependencies configured using Gradle.
+
+## Prerequisites
+- Java 21
+- Gradle
+- 
 ## `GET /api/jobData`
 
 ### Description:
